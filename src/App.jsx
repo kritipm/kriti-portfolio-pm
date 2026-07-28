@@ -1,4 +1,4 @@
-// v2
+// v3
 import { useState, useEffect, useRef } from 'react';
 
 const C = {
@@ -15,50 +15,41 @@ const C = {
 const sg = "'Space Grotesk', sans-serif";
 const jb = "'JetBrains Mono', monospace";
 
-const GLOBAL_CSS = `
-  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-  html { scroll-behavior:smooth; }
-  body {
-    background:#0A0A0A;
-    color:#F5F5F5;
-    font-family:'Space Grotesk', sans-serif;
-    -webkit-font-smoothing:antialiased;
-    overflow-x:hidden;
-  }
-  ::-webkit-scrollbar { width:4px; }
-  ::-webkit-scrollbar-track { background:#0A0A0A; }
-  ::-webkit-scrollbar-thumb { background:#444444; border-radius:2px; }
-  @keyframes pulse {
-    0%,100% { opacity:1; transform:scale(1); }
-    50%      { opacity:.35; transform:scale(.7); }
-  }
-  .pulse-dot { animation: pulse 1.6s ease-in-out infinite; }
-  .hero-fade { transition: opacity .45s ease, transform .45s ease; }
-  .hero-in   { opacity:1; transform:translateY(0); }
-  .hero-out  { opacity:0; transform:translateY(-14px); pointer-events:none; }
-  .h-primary { cursor:pointer; transition:background .2s,color .2s; }
-  .h-primary:hover { background:#E63946 !important; color:#F5F5F5 !important; }
-  .h-ghost { cursor:pointer; transition:border-color .2s,color .2s; text-decoration:none; }
-  .h-ghost:hover { border-color:#E63946 !important; color:#E63946 !important; }
-  .h-live { cursor:pointer; transition:background .2s,color .2s,border-color .2s; text-decoration:none; }
-  .h-live:hover { background:#E63946 !important; color:#F5F5F5 !important; border-color:#E63946 !important; }
-  .h-log { cursor:pointer; transition:border-color .2s,color .2s; }
-  .h-log:hover { border-color:#888888 !important; color:#F5F5F5 !important; }
-  .h-tab { cursor:pointer; transition:color .2s; }
-  .h-tab:hover { color:#F5F5F5 !important; }
-  .h-link { transition:color .2s; text-decoration:none; }
-  .h-link:hover { color:#E63946 !important; }
-  @media (max-width: 768px) {
-    body, html { overflow-x: hidden; max-width: 100vw; }
-    .tabs-container { overflow-x: auto !important; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
-    .tabs-container::-webkit-scrollbar { display: none; }
-    .go-deeper-grid { grid-template-columns: 1fr !important; gap: 12px !important; }
-    .hero-ctas { flex-direction: column !important; width: 100%; }
-    .hero-ctas button, .hero-ctas a { width: 100%; text-align: center; justify-content: center; }
-    .contact-items { flex-direction: column !important; align-items: flex-start !important; gap: 20px !important; }
-    button, a { min-height: 44px; display: inline-flex; align-items: center; }
-  }
-`;
+const GLOBAL_CSS = [
+  '*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }',
+  'html { scroll-behavior:smooth; }',
+  'body { background:#0A0A0A; color:#F5F5F5; font-family:\'Space Grotesk\', sans-serif; -webkit-font-smoothing:antialiased; overflow-x:hidden; }',
+  '::-webkit-scrollbar { width:4px; }',
+  '::-webkit-scrollbar-track { background:#0A0A0A; }',
+  '::-webkit-scrollbar-thumb { background:#444444; border-radius:2px; }',
+  '@keyframes pulse { 0%,100% { opacity:1; transform:scale(1); } 50% { opacity:.35; transform:scale(.7); } }',
+  '.pulse-dot { animation: pulse 1.6s ease-in-out infinite; }',
+  '.hero-fade { transition: opacity .45s ease, transform .45s ease; }',
+  '.hero-in { opacity:1; transform:translateY(0); }',
+  '.hero-out { opacity:0; transform:translateY(-14px); pointer-events:none; }',
+  '.h-primary { cursor:pointer; transition:background .2s,color .2s; }',
+  '.h-primary:hover { background:#E63946 !important; color:#F5F5F5 !important; }',
+  '.h-ghost { cursor:pointer; transition:border-color .2s,color .2s; text-decoration:none; }',
+  '.h-ghost:hover { border-color:#E63946 !important; color:#E63946 !important; }',
+  '.h-live { cursor:pointer; transition:background .2s,color .2s,border-color .2s; text-decoration:none; }',
+  '.h-live:hover { background:#E63946 !important; color:#F5F5F5 !important; border-color:#E63946 !important; }',
+  '.h-log { cursor:pointer; transition:border-color .2s,color .2s; }',
+  '.h-log:hover { border-color:#888888 !important; color:#F5F5F5 !important; }',
+  '.h-tab { cursor:pointer; transition:color .2s; }',
+  '.h-tab:hover { color:#F5F5F5 !important; }',
+  '.h-link { transition:color .2s; text-decoration:none; }',
+  '.h-link:hover { color:#E63946 !important; }',
+  '@media (max-width: 768px) {',
+  '  body, html { overflow-x: hidden; max-width: 100vw; }',
+  '  .tabs-container { overflow-x: auto !important; -webkit-overflow-scrolling: touch; scrollbar-width: none; }',
+  '  .tabs-container::-webkit-scrollbar { display: none; }',
+  '  .go-deeper-grid { grid-template-columns: 1fr !important; gap: 12px !important; }',
+  '  .hero-ctas { flex-direction: column !important; width: 100%; }',
+  '  .hero-ctas button, .hero-ctas a { width: 100%; text-align: center; justify-content: center; }',
+  '  .contact-items { flex-direction: column !important; align-items: flex-start !important; gap: 20px !important; }',
+  '  button, a { min-height: 44px; display: inline-flex; align-items: center; }',
+  '}',
+].join('\n');
 
 const HERO_LINES = [
   { text: 'Identified the drop-off in PM job search. Built an autonomous pipeline to close it.', hl: 'autonomous pipeline' },
@@ -72,7 +63,7 @@ const PROJECTS = [
     tab: 'AUTOMATED THE SEARCH',
     heading: 'PM Job Search Outreach Agent',
     tagline: 'Scrapes PM roles across five platforms daily. Drafts cold outreach in her exact voice. Delivers to Telegram at 8am. Live dashboard shows contact resolution, source performance, and funnel in real time.',
-    metric: '70% of reachable PM opportunities captured daily · 15 drafts in my voice · ₹0/month',
+    metric: '70% of reachable PM opportunities captured daily · 15 drafts in my voice · Rs.0/month',
     tags: ['AI-native tooling', 'Systems thinking'],
     liveUrl: 'https://rolereach-production.up.railway.app',
     sections: [
@@ -100,7 +91,7 @@ const PROJECTS = [
           "Autonomous pipeline over job aggregator spreadsheet. Spreadsheet needs daily manual input. Doesn't scale.",
           'Dashboard over Telegram as primary interface. 51 jobs in a chat thread is noise. Built full triage product on top.',
           'Telegram over WhatsApp. Session window expires every 24 hours. Template approval required. Both would have killed the pipeline before first email sent.',
-          '3-account Snov.io rotation over Hunter.io. Three free-tier accounts at ₹0/month. No drop in requirement.',
+          '3-account Snov.io rotation over Hunter.io. Three free-tier accounts at Rs.0/month. No drop in requirement.',
           'GitHub Actions over always-on server. Runs on trigger. 37 minutes. Costs nothing between cycles.',
           'Human review gate kept. A pipeline that sends without review is a risk not a tool.',
           'Claude API with locked conventions. Voice hard-coded at API layer before model sees a single job.',
@@ -112,7 +103,7 @@ const PROJECTS = [
           '51 PM roles in a single confirmed run across five sources.',
           '23 with named hiring manager emails. ACT NOW in dashboard.',
           '15 cold email drafts in her voice. Ready to send.',
-          '₹0/month running cost.',
+          'Rs.0/month running cost.',
           '37 minutes end-to-end.',
           'Live dashboard permanently.',
           'Validation metric: interview rate per 100 outreach emails.',
@@ -140,7 +131,7 @@ const PROJECTS = [
     tab: 'FIXED THE ONBOARDING',
     heading: 'Bolna Onboarding Activation Funnel',
     tagline: '75% of Bolna revenue depends on activation. Existing flow took 30 minutes and produced zero working demos. Redesigned to get any business owner to first live call in under 15 minutes self-served.',
-    metric: '30 min broken baseline → 15 min target · 75% revenue dependency · Self-serve',
+    metric: '30 min broken baseline to 15 min target · 75% revenue dependency · Self-serve',
     tags: ['B2B PLG', 'Activation design'],
     liveUrl: 'https://bol-na-funnel.vercel.app',
     sections: [
@@ -158,7 +149,7 @@ const PROJECTS = [
         id: '02', title: '02  THE CONSTRAINT',
         bullets: [
           'No backend. Single HTML file. Ruled out resume-where-left-off and time-based credit nudge. Named in PRD not silently dropped.',
-          'No Bolna activation data. p=0.5 conservative assumption. 68-person minimum ±10pp margin.',
+          'No Bolna activation data. p=0.5 conservative assumption. 68-person minimum plus or minus 10pp margin.',
           'Inbound configuration separate setup. Ruled out entirely. Two parallel flows would dilute the problem being solved.',
         ],
       },
@@ -181,7 +172,7 @@ const PROJECTS = [
           'Sent to Bolna founding team with live URL. Unsolicited. Unprompted.',
           'Primary KR: 90% of 68-person cohort reach working live call under 10 minutes.',
           'Baseline: 30+ minutes. Zero demos heard.',
-          'p=0.5. 90% confidence. ±10pp. Minimum 68 signups.',
+          'p=0.5. 90% confidence. plus or minus 10pp. Minimum 68 signups.',
         ],
       },
       {
@@ -244,7 +235,7 @@ const PROJECTS = [
         bullets: [
           'Live product. 8 PRD iterations.',
           '35% KR validated. 62-tester minimum crossed. Statistically defensible.',
-          'p=0.35. ±10pp. 90% confidence.',
+          'p=0.35. plus or minus 10pp. 90% confidence.',
           'Persistent tester ID. Returning visitors count once.',
           'Passcode-gated KPI dashboard.',
           'Rule-based fallback for all testers.',
@@ -297,18 +288,19 @@ const GO_DEEPER = [
 ];
 
 function HL({ text, hl }) {
-  if (!hl || !text.includes(hl)) return <>{text}</>;
+  if (!hl || !text.includes(hl)) return React.createElement(React.Fragment, null, text);
   const i = text.indexOf(hl);
-  return (
-    <>
-      {text.slice(0, i)}
-      <span style={{ color: C.accent }}>{hl}</span>
-      {text.slice(i + hl.length)}
-    </>
+  return React.createElement(
+    React.Fragment,
+    null,
+    text.slice(0, i),
+    React.createElement('span', { style: { color: C.accent } }, hl),
+    text.slice(i + hl.length)
   );
 }
 
 function ProjectPanel({ project, expanded, onToggle }) {
+  const bd = '1px solid ' + C.border;
   return (
     <div style={{ paddingTop: 60 }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 24, flexWrap: 'wrap', marginBottom: 24 }}>
@@ -324,21 +316,21 @@ function ProjectPanel({ project, expanded, onToggle }) {
           </p>
           <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
             {project.tags.map(t => (
-              <span key={t} style={{ fontFamily: jb, fontSize: 10, letterSpacing: '0.1em', textTransform: 'uppercase', color: C.textMuted, border: `1px solid ${C.border}`, padding: '4px 10px' }}>
+              <span key={t} style={{ fontFamily: jb, fontSize: 10, letterSpacing: '0.1em', textTransform: 'uppercase', color: C.textMuted, border: bd, padding: '4px 10px' }}>
                 {t}
               </span>
             ))}
           </div>
         </div>
         <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="h-live"
-          style={{ fontFamily: jb, fontSize: 10, letterSpacing: '0.12em', textTransform: 'uppercase', padding: '10px 16px', background: 'transparent', color: C.textPrimary, border: `1px solid ${C.border}`, display: 'inline-flex', alignItems: 'center', gap: 6, whiteSpace: 'nowrap', flexShrink: 0 }}>
+          style={{ fontFamily: jb, fontSize: 10, letterSpacing: '0.12em', textTransform: 'uppercase', padding: '10px 16px', background: 'transparent', color: C.textPrimary, border: bd, display: 'inline-flex', alignItems: 'center', gap: 6, whiteSpace: 'nowrap', flexShrink: 0 }}>
           ↗ SEE LIVE PRODUCT
         </a>
       </div>
 
       <button onClick={onToggle} className="h-log"
-        style={{ fontFamily: jb, fontSize: 11, letterSpacing: '0.15em', textTransform: 'uppercase', padding: '12px 20px', background: 'transparent', color: C.textSecond, border: `1px solid ${C.border}`, display: 'inline-flex', alignItems: 'center', gap: 8, marginBottom: expanded ? 48 : 0 }}>
-        {expanded ? 'COLLAPSE DECISION LOG ↑' : 'READ THE DECISION LOG ↓'}
+        style={{ fontFamily: jb, fontSize: 11, letterSpacing: '0.15em', textTransform: 'uppercase', padding: '12px 20px', background: 'transparent', color: C.textSecond, border: bd, display: 'inline-flex', alignItems: 'center', gap: 8, marginBottom: expanded ? 48 : 0 }}>
+        {expanded ? 'COLLAPSE DECISION LOG' : 'READ THE DECISION LOG'}
       </button>
 
       {expanded && (
@@ -351,7 +343,7 @@ function ProjectPanel({ project, expanded, onToggle }) {
               <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
                 {sec.bullets.map((b, i) => (
                   <div key={i} style={{ display: 'flex', gap: 14, alignItems: 'flex-start' }}>
-                    <span style={{ color: C.textMuted, flexShrink: 0, fontFamily: jb, fontSize: 13, lineHeight: 1.75 }}>→</span>
+                    <span style={{ color: C.textMuted, flexShrink: 0, fontFamily: jb, fontSize: 13, lineHeight: 1.75 }}>-&gt;</span>
                     <p style={{ fontFamily: sg, fontSize: 14, color: C.textSecond, lineHeight: 1.8 }}>{b}</p>
                   </div>
                 ))}
@@ -359,14 +351,14 @@ function ProjectPanel({ project, expanded, onToggle }) {
             </div>
           ))}
 
-          <div style={{ background: C.card, border: `1px solid ${C.border}`, padding: 28, marginBottom: 36 }}>
+          <div style={{ background: C.card, border: bd, padding: 28, marginBottom: 36 }}>
             <p style={{ fontFamily: jb, fontSize: 11, letterSpacing: '0.15em', textTransform: 'uppercase', color: C.textSecond, marginBottom: 24 }}>
               THINKING BEHIND IT
             </p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
               {project.thinking.map(([assumption, reality], i) => (
                 <div key={i} style={{ display: 'flex', gap: 14 }}>
-                  <span style={{ color: C.textMuted, flexShrink: 0, fontFamily: jb, fontSize: 13, lineHeight: 1.75 }}>→</span>
+                  <span style={{ color: C.textMuted, flexShrink: 0, fontFamily: jb, fontSize: 13, lineHeight: 1.75 }}>-&gt;</span>
                   <p style={{ fontFamily: sg, fontSize: 13, lineHeight: 1.75 }}>
                     <span style={{ color: C.textMuted }}>{assumption} </span>
                     <span style={{ color: C.textPrimary }}>{reality}</span>
@@ -377,7 +369,7 @@ function ProjectPanel({ project, expanded, onToggle }) {
           </div>
 
           <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="h-live"
-            style={{ fontFamily: jb, fontSize: 11, letterSpacing: '0.14em', textTransform: 'uppercase', padding: '14px 28px', background: 'transparent', color: C.textPrimary, border: `1px solid ${C.textPrimary}`, display: 'inline-flex', alignItems: 'center', gap: 8 }}>
+            style={{ fontFamily: jb, fontSize: 11, letterSpacing: '0.14em', textTransform: 'uppercase', padding: '14px 28px', background: 'transparent', color: C.textPrimary, border: '1px solid ' + C.textPrimary, display: 'inline-flex', alignItems: 'center', gap: 8 }}>
             ↗ SEE IT LIVE
           </a>
         </div>
@@ -415,11 +407,12 @@ export default function App() {
     tabsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
   const gutter = 'max(24px, calc((100vw - 960px) / 2))';
+  const bd = '1px solid ' + C.border;
 
   return (
     <div style={{ background: C.bg, minHeight: '100vh' }}>
 
-      <section style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: `80px ${gutter}` }}>
+      <section style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '80px ' + gutter }}>
         <div style={{ marginBottom: 56 }}>
           <p style={{ fontFamily: sg, fontWeight: 700, fontSize: 18, letterSpacing: '0.15em', textTransform: 'uppercase', color: C.textPrimary, marginBottom: 8 }}>
             KRITI KUMARI
@@ -431,7 +424,7 @@ export default function App() {
 
         <div style={{ minHeight: 'clamp(52px,7vw,88px)', marginBottom: 28 }}>
           <p
-            className={`hero-fade ${heroVis ? 'hero-in' : 'hero-out'}`}
+            className={'hero-fade ' + (heroVis ? 'hero-in' : 'hero-out')}
             style={{ fontFamily: sg, fontWeight: 400, fontSize: 'clamp(20px,2.8vw,32px)', color: C.textPrimary, lineHeight: 1.45, maxWidth: 700 }}
           >
             <HL text={HERO_LINES[heroIdx].text} hl={HERO_LINES[heroIdx].hl} />
@@ -452,7 +445,7 @@ export default function App() {
             target="_blank"
             rel="noopener noreferrer"
             className="h-ghost"
-            style={{ fontFamily: sg, fontWeight: 700, fontSize: 13, letterSpacing: '0.1em', textTransform: 'uppercase', padding: '14px 28px', background: 'transparent', color: C.textPrimary, border: `1px solid ${C.textPrimary}`, display: 'inline-flex', alignItems: 'center' }}
+            style={{ fontFamily: sg, fontWeight: 700, fontSize: 13, letterSpacing: '0.1em', textTransform: 'uppercase', padding: '14px 28px', background: 'transparent', color: C.textPrimary, border: '1px solid ' + C.textPrimary, display: 'inline-flex', alignItems: 'center' }}
           >
             READ CV
           </a>
@@ -460,10 +453,10 @@ export default function App() {
       </section>
 
       <div ref={tabsRef}>
-        <div className="tabs-container" style={{ position: 'sticky', top: 0, zIndex: 100, background: C.surface, borderBottom: `1px solid ${C.border}`, display: 'flex', overflowX: 'auto' }}>
+        <div className="tabs-container" style={{ position: 'sticky', top: 0, zIndex: 100, background: C.surface, borderBottom: bd, display: 'flex', overflowX: 'auto' }}>
           {PROJECTS.map((p, i) => (
             <button key={p.id} onClick={() => setActiveTab(i)} className="h-tab"
-              style={{ fontFamily: jb, fontSize: 11, letterSpacing: '0.12em', textTransform: 'uppercase', padding: '18px 24px', background: 'transparent', border: 'none', borderBottom: activeTab === i ? `2px solid ${C.accent}` : '2px solid transparent', marginBottom: -1, color: activeTab === i ? C.textPrimary : C.textMuted, display: 'flex', alignItems: 'center', gap: 8, whiteSpace: 'nowrap', flexShrink: 0 }}>
+              style={{ fontFamily: jb, fontSize: 11, letterSpacing: '0.12em', textTransform: 'uppercase', padding: '18px 24px', background: 'transparent', border: 'none', borderBottom: activeTab === i ? '2px solid ' + C.accent : '2px solid transparent', marginBottom: -1, color: activeTab === i ? C.textPrimary : C.textMuted, display: 'flex', alignItems: 'center', gap: 8, whiteSpace: 'nowrap', flexShrink: 0 }}>
               {activeTab === i && (
                 <span className="pulse-dot" style={{ width: 6, height: 6, borderRadius: '50%', background: C.green, flexShrink: 0 }} />
               )}
@@ -472,7 +465,7 @@ export default function App() {
           ))}
         </div>
 
-        <div style={{ padding: `0 ${gutter} 96px` }}>
+        <div style={{ padding: '0 ' + gutter + ' 96px' }}>
           {PROJECTS.map((p, i) =>
             activeTab === i ? (
               <ProjectPanel key={p.id} project={p} expanded={expanded[i]} onToggle={() => setExpanded(prev => ({ ...prev, [i]: !prev[i] }))} />
@@ -481,13 +474,13 @@ export default function App() {
         </div>
       </div>
 
-      <section style={{ padding: `80px ${gutter}`, borderTop: `1px solid ${C.border}` }}>
+      <section style={{ padding: '80px ' + gutter, borderTop: bd }}>
         <p style={{ fontFamily: jb, fontSize: 11, letterSpacing: '0.2em', textTransform: 'uppercase', color: C.textSecond, marginBottom: 40 }}>
           GO DEEPER
         </p>
         <div className="go-deeper-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 16 }}>
           {GO_DEEPER.map(card => (
-            <div key={card.title} style={{ background: C.card, border: `1px solid ${C.border}`, padding: 28 }}>
+            <div key={card.title} style={{ background: C.card, border: bd, padding: 28 }}>
               <p style={{ fontFamily: jb, fontSize: 10, letterSpacing: '0.15em', textTransform: 'uppercase', color: C.textSecond, marginBottom: 22, lineHeight: 1.65, whiteSpace: 'pre-line' }}>
                 {card.title}
               </p>
@@ -505,7 +498,7 @@ export default function App() {
         </div>
       </section>
 
-      <section style={{ padding: `80px ${gutter}`, borderTop: `1px solid ${C.border}` }}>
+      <section style={{ padding: '80px ' + gutter, borderTop: bd }}>
         <p style={{ fontFamily: jb, fontSize: 11, letterSpacing: '0.2em', textTransform: 'uppercase', color: C.textSecond, marginBottom: 40 }}>
           GET IN TOUCH
         </p>
@@ -528,7 +521,7 @@ export default function App() {
         </div>
       </section>
 
-      <footer style={{ padding: `24px ${gutter}`, borderTop: `1px solid ${C.border}` }}>
+      <footer style={{ padding: '24px ' + gutter, borderTop: bd }}>
         <p style={{ fontFamily: jb, fontSize: 11, color: C.textMuted, letterSpacing: '0.08em' }}>
           Last updated — Portfolio July 2026.
         </p>
