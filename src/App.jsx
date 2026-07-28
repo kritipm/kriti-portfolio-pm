@@ -1,4 +1,4 @@
-// v3
+// v4
 import { useState, useEffect, useRef } from 'react';
 
 const C = {
@@ -18,7 +18,7 @@ const jb = "'JetBrains Mono', monospace";
 const GLOBAL_CSS = [
   '*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }',
   'html { scroll-behavior:smooth; }',
-  'body { background:#0A0A0A; color:#F5F5F5; font-family:\'Space Grotesk\', sans-serif; -webkit-font-smoothing:antialiased; overflow-x:hidden; }',
+  "body { background:#0A0A0A; color:#F5F5F5; font-family:'Space Grotesk', sans-serif; -webkit-font-smoothing:antialiased; overflow-x:hidden; }",
   '::-webkit-scrollbar { width:4px; }',
   '::-webkit-scrollbar-track { background:#0A0A0A; }',
   '::-webkit-scrollbar-thumb { background:#444444; border-radius:2px; }',
@@ -63,7 +63,7 @@ const PROJECTS = [
     tab: 'AUTOMATED THE SEARCH',
     heading: 'PM Job Search Outreach Agent',
     tagline: 'Scrapes PM roles across five platforms daily. Drafts cold outreach in her exact voice. Delivers to Telegram at 8am. Live dashboard shows contact resolution, source performance, and funnel in real time.',
-    metric: '70% of reachable PM opportunities captured daily · 15 drafts in my voice · Rs.0/month',
+    metric: '70% of reachable PM opportunities captured daily - 15 drafts in my voice - Rs.0/month',
     tags: ['AI-native tooling', 'Systems thinking'],
     liveUrl: 'https://rolereach-production.up.railway.app',
     sections: [
@@ -131,7 +131,7 @@ const PROJECTS = [
     tab: 'FIXED THE ONBOARDING',
     heading: 'Bolna Onboarding Activation Funnel',
     tagline: '75% of Bolna revenue depends on activation. Existing flow took 30 minutes and produced zero working demos. Redesigned to get any business owner to first live call in under 15 minutes self-served.',
-    metric: '30 min broken baseline to 15 min target · 75% revenue dependency · Self-serve',
+    metric: '30 min broken baseline to 15 min target - 75% revenue dependency - Self-serve',
     tags: ['B2B PLG', 'Activation design'],
     liveUrl: 'https://bol-na-funnel.vercel.app',
     sections: [
@@ -149,7 +149,7 @@ const PROJECTS = [
         id: '02', title: '02  THE CONSTRAINT',
         bullets: [
           'No backend. Single HTML file. Ruled out resume-where-left-off and time-based credit nudge. Named in PRD not silently dropped.',
-          'No Bolna activation data. p=0.5 conservative assumption. 68-person minimum plus or minus 10pp margin.',
+          'No Bolna activation data. p=0.5 conservative assumption. 68-person minimum margin.',
           'Inbound configuration separate setup. Ruled out entirely. Two parallel flows would dilute the problem being solved.',
         ],
       },
@@ -172,7 +172,7 @@ const PROJECTS = [
           'Sent to Bolna founding team with live URL. Unsolicited. Unprompted.',
           'Primary KR: 90% of 68-person cohort reach working live call under 10 minutes.',
           'Baseline: 30+ minutes. Zero demos heard.',
-          'p=0.5. 90% confidence. plus or minus 10pp. Minimum 68 signups.',
+          'p=0.5. 90% confidence. Minimum 68 signups.',
         ],
       },
       {
@@ -197,7 +197,7 @@ const PROJECTS = [
     tab: 'MAPPED THE GAP',
     heading: 'Emerging Roles Reachability Tool for Freshers',
     tagline: 'Live product. First KR hit. 35% of testers marked at least one role reachable within two weeks. Built scoring system, shipped it, validated it.',
-    metric: '35% KR validated · 62-tester minimum crossed · Statistically defensible',
+    metric: '35% KR validated - 62-tester minimum crossed - Statistically defensible',
     tags: ['Hypothesis-driven PM', 'Metrics design'],
     liveUrl: 'https://rolereachability-tool-qlxpx3193-role-reachability.vercel.app',
     sections: [
@@ -225,7 +225,7 @@ const PROJECTS = [
           'First instinct was AI scoring. AI fails unpredictably. Pure math instead. Skills 30% + Experience 30% + Background 20% + Communication 20%. Instant. Never fails.',
           'Flat score threshold tells how much you bring. Not whether reachable. Four gates instead. Skills anchor. Background decides. Experience lifts. Communication caps.',
           'Account-less testers would see blank card. Built rule-based fallback. Real skill-specific content. Labeled honestly.',
-          'Role-only key silently overwrote marks. Composite roleId::profileId instead. Both marks kept independently.',
+          'Role-only key silently overwrote marks. Composite roleId and profileId instead. Both marks kept independently.',
           'Device-only dashboard measured itself. Shared storage pooled across all testers.',
           'Multi-select filter for power users. Freshers need clarity. Single-select.',
         ],
@@ -235,7 +235,7 @@ const PROJECTS = [
         bullets: [
           'Live product. 8 PRD iterations.',
           '35% KR validated. 62-tester minimum crossed. Statistically defensible.',
-          'p=0.35. plus or minus 10pp. 90% confidence.',
+          'p=0.35. 90% confidence.',
           'Persistent tester ID. Returning visitors count once.',
           'Passcode-gated KPI dashboard.',
           'Rule-based fallback for all testers.',
@@ -288,14 +288,14 @@ const GO_DEEPER = [
 ];
 
 function HL({ text, hl }) {
-  if (!hl || !text.includes(hl)) return React.createElement(React.Fragment, null, text);
+  if (!hl || !text.includes(hl)) return <>{text}</>;
   const i = text.indexOf(hl);
-  return React.createElement(
-    React.Fragment,
-    null,
-    text.slice(0, i),
-    React.createElement('span', { style: { color: C.accent } }, hl),
-    text.slice(i + hl.length)
+  return (
+    <>
+      {text.slice(0, i)}
+      <span style={{ color: C.accent }}>{hl}</span>
+      {text.slice(i + hl.length)}
+    </>
   );
 }
 
@@ -324,7 +324,7 @@ function ProjectPanel({ project, expanded, onToggle }) {
         </div>
         <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="h-live"
           style={{ fontFamily: jb, fontSize: 10, letterSpacing: '0.12em', textTransform: 'uppercase', padding: '10px 16px', background: 'transparent', color: C.textPrimary, border: bd, display: 'inline-flex', alignItems: 'center', gap: 6, whiteSpace: 'nowrap', flexShrink: 0 }}>
-          ↗ SEE LIVE PRODUCT
+          See Live Product
         </a>
       </div>
 
@@ -343,7 +343,7 @@ function ProjectPanel({ project, expanded, onToggle }) {
               <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
                 {sec.bullets.map((b, i) => (
                   <div key={i} style={{ display: 'flex', gap: 14, alignItems: 'flex-start' }}>
-                    <span style={{ color: C.textMuted, flexShrink: 0, fontFamily: jb, fontSize: 13, lineHeight: 1.75 }}>-&gt;</span>
+                    <span style={{ color: C.textMuted, flexShrink: 0, fontFamily: jb, fontSize: 13, lineHeight: 1.75 }}>{'>'}</span>
                     <p style={{ fontFamily: sg, fontSize: 14, color: C.textSecond, lineHeight: 1.8 }}>{b}</p>
                   </div>
                 ))}
@@ -358,7 +358,7 @@ function ProjectPanel({ project, expanded, onToggle }) {
             <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
               {project.thinking.map(([assumption, reality], i) => (
                 <div key={i} style={{ display: 'flex', gap: 14 }}>
-                  <span style={{ color: C.textMuted, flexShrink: 0, fontFamily: jb, fontSize: 13, lineHeight: 1.75 }}>-&gt;</span>
+                  <span style={{ color: C.textMuted, flexShrink: 0, fontFamily: jb, fontSize: 13, lineHeight: 1.75 }}>{'>'}</span>
                   <p style={{ fontFamily: sg, fontSize: 13, lineHeight: 1.75 }}>
                     <span style={{ color: C.textMuted }}>{assumption} </span>
                     <span style={{ color: C.textPrimary }}>{reality}</span>
@@ -370,7 +370,7 @@ function ProjectPanel({ project, expanded, onToggle }) {
 
           <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="h-live"
             style={{ fontFamily: jb, fontSize: 11, letterSpacing: '0.14em', textTransform: 'uppercase', padding: '14px 28px', background: 'transparent', color: C.textPrimary, border: '1px solid ' + C.textPrimary, display: 'inline-flex', alignItems: 'center', gap: 8 }}>
-            ↗ SEE IT LIVE
+            See It Live
           </a>
         </div>
       )}
@@ -440,7 +440,7 @@ export default function App() {
             style={{ fontFamily: sg, fontWeight: 700, fontSize: 13, letterSpacing: '0.1em', textTransform: 'uppercase', padding: '14px 28px', background: C.textPrimary, color: C.bg, border: 'none' }}>
             SEE MY WORK
           </button>
-          
+          <a
             href="https://docs.google.com/document/d/1XNEAJEkzXqUM4FSw41wIWECK6ySPA7m3/edit?usp=sharing"
             target="_blank"
             rel="noopener noreferrer"
@@ -488,7 +488,7 @@ export default function App() {
                 {card.links.map(lk => (
                   <a key={lk.label} href={lk.url} target="_blank" rel="noopener noreferrer" className="h-link"
                     style={{ fontFamily: sg, fontSize: 13, color: C.textPrimary, display: 'flex', alignItems: 'center', gap: 8 }}>
-                    <span style={{ color: C.accent, flexShrink: 0 }}>↗</span>
+                    <span style={{ color: C.accent, flexShrink: 0 }}>{'>'}</span>
                     {lk.label}
                   </a>
                 ))}
