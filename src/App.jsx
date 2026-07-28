@@ -1,7 +1,6 @@
 // v2
 import { useState, useEffect, useRef } from 'react';
 
-/* ── DESIGN TOKENS ─────────────────────────────────────────── */
 const C = {
   bg:          '#0A0A0A',
   surface:     '#111111',
@@ -16,7 +15,6 @@ const C = {
 const sg = "'Space Grotesk', sans-serif";
 const jb = "'JetBrains Mono', monospace";
 
-/* ── GLOBAL CSS ────────────────────────────────────────────── */
 const GLOBAL_CSS = `
   *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
   html { scroll-behavior:smooth; }
@@ -30,35 +28,26 @@ const GLOBAL_CSS = `
   ::-webkit-scrollbar { width:4px; }
   ::-webkit-scrollbar-track { background:#0A0A0A; }
   ::-webkit-scrollbar-thumb { background:#444444; border-radius:2px; }
-
   @keyframes pulse {
     0%,100% { opacity:1; transform:scale(1); }
     50%      { opacity:.35; transform:scale(.7); }
   }
   .pulse-dot { animation: pulse 1.6s ease-in-out infinite; }
-
   .hero-fade { transition: opacity .45s ease, transform .45s ease; }
   .hero-in   { opacity:1; transform:translateY(0); }
   .hero-out  { opacity:0; transform:translateY(-14px); pointer-events:none; }
-
   .h-primary { cursor:pointer; transition:background .2s,color .2s; }
   .h-primary:hover { background:#E63946 !important; color:#F5F5F5 !important; }
-
   .h-ghost { cursor:pointer; transition:border-color .2s,color .2s; text-decoration:none; }
   .h-ghost:hover { border-color:#E63946 !important; color:#E63946 !important; }
-
   .h-live { cursor:pointer; transition:background .2s,color .2s,border-color .2s; text-decoration:none; }
   .h-live:hover { background:#E63946 !important; color:#F5F5F5 !important; border-color:#E63946 !important; }
-
   .h-log { cursor:pointer; transition:border-color .2s,color .2s; }
   .h-log:hover { border-color:#888888 !important; color:#F5F5F5 !important; }
-
   .h-tab { cursor:pointer; transition:color .2s; }
   .h-tab:hover { color:#F5F5F5 !important; }
-
   .h-link { transition:color .2s; text-decoration:none; }
   .h-link:hover { color:#E63946 !important; }
-
   @media (max-width: 768px) {
     body, html { overflow-x: hidden; max-width: 100vw; }
     .tabs-container { overflow-x: auto !important; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
@@ -80,11 +69,11 @@ const HERO_LINES = [
 const PROJECTS = [
   {
     id: 0,
-    tab:     'AUTOMATED THE SEARCH',
+    tab: 'AUTOMATED THE SEARCH',
     heading: 'PM Job Search Outreach Agent',
     tagline: 'Scrapes PM roles across five platforms daily. Drafts cold outreach in her exact voice. Delivers to Telegram at 8am. Live dashboard shows contact resolution, source performance, and funnel in real time.',
-    metric:  '70% of reachable PM opportunities captured daily · 15 drafts in my voice · ₹0/month',
-    tags:    ['AI-native tooling', 'Systems thinking'],
+    metric: '70% of reachable PM opportunities captured daily · 15 drafts in my voice · ₹0/month',
+    tags: ['AI-native tooling', 'Systems thinking'],
     liveUrl: 'https://rolereach-production.up.railway.app',
     sections: [
       {
@@ -139,20 +128,20 @@ const PROJECTS = [
       },
     ],
     thinking: [
-      ['Telegram delivery felt complete.',        '51 jobs in a chat thread is noise. Built full triage dashboard. ACT NOW prioritisation. Contact resolution at a glance.'],
-      ['Full automation was the obvious goal.',    'A pipeline that sends without review is a risk not a tool. Human review gate kept deliberately.'],
-      ['Professional sounding drafts felt right.','Professional is generic. Locked every convention at API layer.'],
-      ['WhatsApp felt natural.',                  'Session window expires every 24 hours. Switched to Telegram before writing a line of code.'],
-      ['Pipeline felt complete after scraping.',  'Two scrapers shipped without enrichment. Dependencies mapped after not before.'],
+      ['Telegram delivery felt complete.', '51 jobs in a chat thread is noise. Built full triage dashboard. ACT NOW prioritisation. Contact resolution at a glance.'],
+      ['Full automation was the obvious goal.', 'A pipeline that sends without review is a risk not a tool. Human review gate kept deliberately.'],
+      ['Professional sounding drafts felt right.', 'Professional is generic. Locked every convention at API layer.'],
+      ['WhatsApp felt natural.', 'Session window expires every 24 hours. Switched to Telegram before writing a line of code.'],
+      ['Pipeline felt complete after scraping.', 'Two scrapers shipped without enrichment. Dependencies mapped after not before.'],
     ],
   },
   {
     id: 1,
-    tab:     'FIXED THE ONBOARDING',
+    tab: 'FIXED THE ONBOARDING',
     heading: 'Bolna Onboarding Activation Funnel',
     tagline: '75% of Bolna revenue depends on activation. Existing flow took 30 minutes and produced zero working demos. Redesigned to get any business owner to first live call in under 15 minutes self-served.',
-    metric:  '30 min broken baseline → 15 min target · 75% revenue dependency · Self-serve',
-    tags:    ['B2B PLG', 'Activation design'],
+    metric: '30 min broken baseline → 15 min target · 75% revenue dependency · Self-serve',
+    tags: ['B2B PLG', 'Activation design'],
     liveUrl: 'https://bol-na-funnel.vercel.app',
     sections: [
       {
@@ -205,20 +194,20 @@ const PROJECTS = [
       },
     ],
     thinking: [
-      ['Bolna sidebar felt safe.',             'Sidebar exposes capability to existing users. Not first-timers. Single scrollable room. Full depth behind one icon.'],
-      ['Voice belonged with audio settings.',  'Voice is first moment owner feels the product. Moved to Section 1.'],
-      ['Lifecycle emails in scope.',           'Retention copy for non-activated users is wrong problem. Activation first.'],
+      ['Bolna sidebar felt safe.', 'Sidebar exposes capability to existing users. Not first-timers. Single scrollable room. Full depth behind one icon.'],
+      ['Voice belonged with audio settings.', 'Voice is first moment owner feels the product. Moved to Section 1.'],
+      ['Lifecycle emails in scope.', 'Retention copy for non-activated users is wrong problem. Activation first.'],
       ['Simple/Advanced fork felt inclusive.', 'Forces self-categorization. Per-field toggle instead.'],
-      ['Safety net felt optional.',            'Majority never made the decision. Required for every agent now.'],
+      ['Safety net felt optional.', 'Majority never made the decision. Required for every agent now.'],
     ],
   },
   {
     id: 2,
-    tab:     'MAPPED THE GAP',
+    tab: 'MAPPED THE GAP',
     heading: 'Emerging Roles Reachability Tool for Freshers',
     tagline: 'Live product. First KR hit. 35% of testers marked at least one role reachable within two weeks. Built scoring system, shipped it, validated it.',
-    metric:  '35% KR validated · 62-tester minimum crossed · Statistically defensible',
-    tags:    ['Hypothesis-driven PM', 'Metrics design'],
+    metric: '35% KR validated · 62-tester minimum crossed · Statistically defensible',
+    tags: ['Hypothesis-driven PM', 'Metrics design'],
     liveUrl: 'https://rolereachability-tool-qlxpx3193-role-reachability.vercel.app',
     sections: [
       {
@@ -271,11 +260,11 @@ const PROJECTS = [
       },
     ],
     thinking: [
-      ['Freshers skip fancy titles.',                 'Wrong. Title irrelevant. Real block was no structured assessment. Rewrote KR, scoring, UX before single screen built.'],
+      ['Freshers skip fancy titles.', 'Wrong. Title irrelevant. Real block was no structured assessment. Rewrote KR, scoring, UX before single screen built.'],
       ['Flat score cutoff tells how much you bring.', 'Not reachability. Four gates.'],
-      ['Resume upload felt personal.',                'Manual questionnaire validates faster. Discovery is the job.'],
-      ['AI felt right for scoring.',                  'Fails unpredictably. Math instead. AI for explanation only after trust earned.'],
-      ['Role-only marks sufficient.',                 'Same role twice is two different discoveries. Composite key. Both frozen.'],
+      ['Resume upload felt personal.', 'Manual questionnaire validates faster. Discovery is the job.'],
+      ['AI felt right for scoring.', 'Fails unpredictably. Math instead. AI for explanation only after trust earned.'],
+      ['Role-only marks sufficient.', 'Same role twice is two different discoveries. Composite key. Both frozen.'],
     ],
   },
 ];
@@ -285,24 +274,24 @@ const GO_DEEPER = [
     title: 'PM JOB SEARCH\nOUTREACH AGENT',
     links: [
       { label: 'PM Thinking Doc', url: 'https://docs.google.com/document/d/17sGTRD6TvpI1_oLnJlFLZbBKO-jl1BXh/edit' },
-      { label: 'PRD',             url: 'https://docs.google.com/document/d/1ozcW0V6NE2ELUrbU2734ExDDlTQO62ZI/edit' },
-      { label: 'GitHub',          url: 'https://github.com/kritipm/rolereach' },
+      { label: 'PRD', url: 'https://docs.google.com/document/d/1ozcW0V6NE2ELUrbU2734ExDDlTQO62ZI/edit' },
+      { label: 'GitHub', url: 'https://github.com/kritipm/rolereach' },
     ],
   },
   {
     title: 'BOLNA ONBOARDING\nACTIVATION FUNNEL',
     links: [
       { label: 'PM Thinking Doc', url: 'https://docs.google.com/document/d/1MEp-lKaTyklciafv483b2PnQPriQVZgI/edit' },
-      { label: 'PRD',             url: 'https://docs.google.com/document/d/1HIvWNhVei1YwPnGp2NhPox_wNm8YWYh_/edit' },
-      { label: 'GitHub',          url: 'https://github.com/kritipm/bol-na-funnel' },
+      { label: 'PRD', url: 'https://docs.google.com/document/d/1HIvWNhVei1YwPnGp2NhPox_wNm8YWYh_/edit' },
+      { label: 'GitHub', url: 'https://github.com/kritipm/bol-na-funnel' },
     ],
   },
   {
     title: 'EMERGING ROLES\nREACHABILITY TOOL',
     links: [
       { label: 'PM Thinking Doc', url: 'https://docs.google.com/document/d/1l_fSMhQqYl140lloQqYlin2U2W7jsLOu/edit' },
-      { label: 'PRD',             url: 'https://docs.google.com/document/d/1PhvRRkVrqLDsvnPJ0quQBYw2b5fss7aP/edit' },
-      { label: 'GitHub',          url: 'https://github.com/kritipm/rolereachability-tool' },
+      { label: 'PRD', url: 'https://docs.google.com/document/d/1PhvRRkVrqLDsvnPJ0quQBYw2b5fss7aP/edit' },
+      { label: 'GitHub', url: 'https://github.com/kritipm/rolereachability-tool' },
     ],
   },
 ];
@@ -399,9 +388,9 @@ function ProjectPanel({ project, expanded, onToggle }) {
 
 export default function App() {
   const [activeTab, setActiveTab] = useState(0);
-  const [expanded,  setExpanded]  = useState({ 0: false, 1: false, 2: false });
-  const [heroIdx,   setHeroIdx]   = useState(0);
-  const [heroVis,   setHeroVis]   = useState(true);
+  const [expanded, setExpanded] = useState({ 0: false, 1: false, 2: false });
+  const [heroIdx, setHeroIdx] = useState(0);
+  const [heroVis, setHeroVis] = useState(true);
   const tabsRef = useRef(null);
 
   useEffect(() => {
@@ -458,7 +447,6 @@ export default function App() {
             style={{ fontFamily: sg, fontWeight: 700, fontSize: 13, letterSpacing: '0.1em', textTransform: 'uppercase', padding: '14px 28px', background: C.textPrimary, color: C.bg, border: 'none' }}>
             SEE MY WORK
           </button>
-
           
             href="https://docs.google.com/document/d/1XNEAJEkzXqUM4FSw41wIWECK6ySPA7m3/edit?usp=sharing"
             target="_blank"
@@ -523,9 +511,9 @@ export default function App() {
         </p>
         <div className="contact-items" style={{ display: 'flex', flexDirection: 'column', gap: 22 }}>
           {[
-            { label: 'Phone',    href: 'tel:+916201890335',                  text: '+91 6201890335',          ext: false },
-            { label: 'Email',    href: 'mailto:kritipm62@gmail.com',          text: 'kritipm62@gmail.com',     ext: false },
-            { label: 'LinkedIn', href: 'https://www.linkedin.com/in/kritiux', text: 'linkedin.com/in/kritiux', ext: true  },
+            { label: 'Phone', href: 'tel:+916201890335', text: '+91 6201890335', ext: false },
+            { label: 'Email', href: 'mailto:kritipm62@gmail.com', text: 'kritipm62@gmail.com', ext: false },
+            { label: 'LinkedIn', href: 'https://www.linkedin.com/in/kritiux', text: 'linkedin.com/in/kritiux', ext: true },
           ].map(item => (
             <a key={item.label} href={item.href}
               {...(item.ext ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
