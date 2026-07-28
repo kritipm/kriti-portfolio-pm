@@ -149,4 +149,402 @@ const PROJECTS = [
     id: 1,
     tab:     'FIXED THE ONBOARDING',
     heading: 'Bolna Onboarding Activation Funnel',
-    tagline: '75% of Bolna revenue depends
+    tagline: '75% of Bolna revenue depends on activation. Existing flow took 30 minutes and produced zero working demos. Redesigned to get any business owner to first live call in under 15 minutes self-served.',
+    metric:  '30 min broken baseline → 15 min target · 75% revenue dependency · Self-serve',
+    tags:    ['B2B PLG', 'Activation design'],
+    liveUrl: 'https://bol-na-funnel.vercel.app',
+    sections: [
+      {
+        id: '01', title: '01  THE GAP',
+        bullets: [
+          "Bolna's core product works. Business operators across India can build AI calling agents without writing code.",
+          '75% of revenue comes from operators activating and making live calls. Path from signup to first live call was broken.',
+          'Studio encountered by non-technical owners was built for engineers. tts_provider, temperature, buffer_size — raw parameters with no translation.',
+          'Chat test stuck on loading spinner. Confirmed via Bolna support chat.',
+          'Full walkthrough took 30+ minutes. Zero working demos heard.',
+        ],
+      },
+      {
+        id: '02', title: '02  THE CONSTRAINT',
+        bullets: [
+          'No backend. Single HTML file. Ruled out resume-where-left-off and time-based credit nudge. Named in PRD not silently dropped.',
+          'No Bolna activation data. p=0.5 conservative assumption. 68-person minimum ±10pp margin.',
+          'Inbound configuration separate setup. Ruled out entirely. Two parallel flows would dilute the problem being solved.',
+        ],
+      },
+      {
+        id: '03', title: '03  THE DECISION',
+        bullets: [
+          "Voice was buried after five setup fields. Business owners configuring a product they hadn't felt yet. Moved to first. Hear the agent before touching settings.",
+          'Simple/Advanced fork forced self-categorization before entry. One flow instead. Depth always one tap away.',
+          'Safety net only appeared when system failed to match goal. Most users never made the decision. Made required for every agent.',
+          'Full landing redesign in scope. Drop-off inside Studio after signup. Redesigning upstream inverts sequence. Scoped out.',
+          'Single demo run forced watching everything. Per-scenario play buttons instead. Each independently testable.',
+          'Credit warning toast only. Toast nobody sees never lands. Persistent badge added.',
+          "Lifecycle emails in scope. Retention for users who haven't activated solves wrong problem. Scoped out entirely.",
+          "Sidebar with eight tabs matched Bolna's structure. Sidebar is for existing users. Single room instead. Full depth behind one icon.",
+        ],
+      },
+      {
+        id: '04', title: '04  THE OUTCOME',
+        bullets: [
+          'Sent to Bolna founding team with live URL. Unsolicited. Unprompted.',
+          'Primary KR: 90% of 68-person cohort reach working live call under 10 minutes.',
+          'Baseline: 30+ minutes. Zero demos heard.',
+          'p=0.5. 90% confidence. ±10pp. Minimum 68 signups.',
+        ],
+      },
+      {
+        id: '05', title: "05  WHAT I'D DO DIFFERENTLY",
+        bullets: [
+          'Dual-trigger nudge missing because static file constraint caught too late. Would map PRD features against architecture before writing requirements.',
+          'No distribution plan before prototype. Would define channel and cohort before locking sample size.',
+          'Assumed spinner was known bug. Would replicate across three browsers first.',
+        ],
+      },
+    ],
+    thinking: [
+      ['Bolna sidebar felt safe.',             'Sidebar exposes capability to existing users. Not first-timers. Single scrollable room. Full depth behind one icon.'],
+      ['Voice belonged with audio settings.',  'Voice is first moment owner feels the product. Moved to Section 1.'],
+      ['Lifecycle emails in scope.',           'Retention copy for non-activated users is wrong problem. Activation first.'],
+      ['Simple/Advanced fork felt inclusive.', 'Forces self-categorization. Per-field toggle instead.'],
+      ['Safety net felt optional.',            'Majority never made the decision. Required for every agent now.'],
+    ],
+  },
+  {
+    id: 2,
+    tab:     'MAPPED THE GAP',
+    heading: 'Emerging Roles Reachability Tool for Freshers',
+    tagline: 'Live product. First KR hit. 35% of testers marked at least one role reachable within two weeks. Built scoring system, shipped it, validated it.',
+    metric:  '35% KR validated · 62-tester minimum crossed · Statistically defensible',
+    tags:    ['Hypothesis-driven PM', 'Metrics design'],
+    liveUrl: 'https://rolereachability-tool-qlxpx3193-role-reachability.vercel.app',
+    sections: [
+      {
+        id: '01', title: '01  THE GAP',
+        bullets: [
+          "Freshers scroll past unfamiliar titles. Assumption the role isn't for them — never checked against anything real.",
+          'Original hypothesis: freshers skip fancy titles. Seemed true. Was wrong.',
+          'Title is irrelevant. Plain title can hide a stretch role. Fancy title can be completely reachable.',
+          'No structured way to assess fit. Defaulted to instinct. Instinct is almost always wrong both directions.',
+          'Nine months of lived experience became the product brief.',
+        ],
+      },
+      {
+        id: '02', title: '02  THE CONSTRAINT',
+        bullets: [
+          "No login. Fresher won't create account to explore. Signup before value kills funnel at entry.",
+          'AI unreliable as primary infrastructure. Blank card on API failure breaks trust at the only moment that matters.',
+          "No existing baseline. KR of 35% couldn't be validated against prior evidence. 62-tester minimum exists because of this.",
+        ],
+      },
+      {
+        id: '03', title: '03  THE DECISION',
+        bullets: [
+          'First instinct was AI scoring. AI fails unpredictably. Pure math instead. Skills 30% + Experience 30% + Background 20% + Communication 20%. Instant. Never fails.',
+          'Flat score threshold tells how much you bring. Not whether reachable. Four gates instead. Skills anchor. Background decides. Experience lifts. Communication caps.',
+          'Account-less testers would see blank card. Built rule-based fallback. Real skill-specific content. Labeled honestly.',
+          'Role-only key silently overwrote marks. Composite roleId::profileId instead. Both marks kept independently.',
+          'Device-only dashboard measured itself. Shared storage pooled across all testers.',
+          'Multi-select filter for power users. Freshers need clarity. Single-select.',
+        ],
+      },
+      {
+        id: '04', title: '04  THE OUTCOME',
+        bullets: [
+          'Live product. 8 PRD iterations.',
+          '35% KR validated. 62-tester minimum crossed. Statistically defensible.',
+          'p=0.35. ±10pp. 90% confidence.',
+          'Persistent tester ID. Returning visitors count once.',
+          'Passcode-gated KPI dashboard.',
+          'Rule-based fallback for all testers.',
+        ],
+      },
+      {
+        id: '05', title: "05  WHAT I'D DO DIFFERENTLY",
+        bullets: [
+          'Experience fit flat bucket count. Would run five structured interviews before locking weights.',
+          '35% target assumed meaningful. Would pressure-test against 25% and 45%.',
+          'Hypothesis drove two weeks before proven wrong. Would stress-test with five user conversations first.',
+        ],
+      },
+    ],
+    thinking: [
+      ['Freshers skip fancy titles.',                 'Wrong. Title irrelevant. Real block was no structured assessment. Rewrote KR, scoring, UX before single screen built.'],
+      ['Flat score cutoff tells how much you bring.', 'Not reachability. Four gates.'],
+      ['Resume upload felt personal.',                'Manual questionnaire validates faster. Discovery is the job.'],
+      ['AI felt right for scoring.',                  'Fails unpredictably. Math instead. AI for explanation only after trust earned.'],
+      ['Role-only marks sufficient.',                 'Same role twice is two different discoveries. Composite key. Both frozen.'],
+    ],
+  },
+];
+
+const GO_DEEPER = [
+  {
+    title: 'PM JOB SEARCH\nOUTREACH AGENT',
+    links: [
+      { label: 'PM Thinking Doc', url: 'https://docs.google.com/document/d/17sGTRD6TvpI1_oLnJlFLZbBKO-jl1BXh/edit' },
+      { label: 'PRD',             url: 'https://docs.google.com/document/d/1ozcW0V6NE2ELUrbU2734ExDDlTQO62ZI/edit' },
+      { label: 'GitHub',          url: 'https://github.com/kritipm/rolereach' },
+    ],
+  },
+  {
+    title: 'BOLNA ONBOARDING\nACTIVATION FUNNEL',
+    links: [
+      { label: 'PM Thinking Doc', url: 'https://docs.google.com/document/d/1MEp-lKaTyklciafv483b2PnQPriQVZgI/edit' },
+      { label: 'PRD',             url: 'https://docs.google.com/document/d/1HIvWNhVei1YwPnGp2NhPox_wNm8YWYh_/edit' },
+      { label: 'GitHub',          url: 'https://github.com/kritipm/bol-na-funnel' },
+    ],
+  },
+  {
+    title: 'EMERGING ROLES\nREACHABILITY TOOL',
+    links: [
+      { label: 'PM Thinking Doc', url: 'https://docs.google.com/document/d/1l_fSMhQqYl140lloQqYlin2U2W7jsLOu/edit' },
+      { label: 'PRD',             url: 'https://docs.google.com/document/d/1PhvRRkVrqLDsvnPJ0quQBYw2b5fss7aP/edit' },
+      { label: 'GitHub',          url: 'https://github.com/kritipm/rolereachability-tool' },
+    ],
+  },
+];
+
+function HL({ text, hl }) {
+  if (!hl || !text.includes(hl)) return <>{text}</>;
+  const i = text.indexOf(hl);
+  return (
+    <>
+      {text.slice(0, i)}
+      <span style={{ color: C.accent }}>{hl}</span>
+      {text.slice(i + hl.length)}
+    </>
+  );
+}
+
+function ProjectPanel({ project, expanded, onToggle }) {
+  return (
+    <div style={{ paddingTop: 60 }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 24, flexWrap: 'wrap', marginBottom: 24 }}>
+        <div style={{ flex: 1, minWidth: 240 }}>
+          <h2 style={{ fontFamily: sg, fontWeight: 700, fontSize: 'clamp(22px,3vw,36px)', color: C.textPrimary, lineHeight: 1.15, marginBottom: 14 }}>
+            {project.heading}
+          </h2>
+          <p style={{ fontFamily: sg, fontSize: 15, color: C.textSecond, lineHeight: 1.7, maxWidth: 620, marginBottom: 16 }}>
+            {project.tagline}
+          </p>
+          <p style={{ fontFamily: jb, fontSize: 12, color: C.accent, lineHeight: 1.6, marginBottom: 18 }}>
+            {project.metric}
+          </p>
+          <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+            {project.tags.map(t => (
+              <span key={t} style={{ fontFamily: jb, fontSize: 10, letterSpacing: '0.1em', textTransform: 'uppercase', color: C.textMuted, border: `1px solid ${C.border}`, padding: '4px 10px' }}>
+                {t}
+              </span>
+            ))}
+          </div>
+        </div>
+        <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="h-live"
+          style={{ fontFamily: jb, fontSize: 10, letterSpacing: '0.12em', textTransform: 'uppercase', padding: '10px 16px', background: 'transparent', color: C.textPrimary, border: `1px solid ${C.border}`, display: 'inline-flex', alignItems: 'center', gap: 6, whiteSpace: 'nowrap', flexShrink: 0 }}>
+          ↗ SEE LIVE PRODUCT
+        </a>
+      </div>
+
+      <button onClick={onToggle} className="h-log"
+        style={{ fontFamily: jb, fontSize: 11, letterSpacing: '0.15em', textTransform: 'uppercase', padding: '12px 20px', background: 'transparent', color: C.textSecond, border: `1px solid ${C.border}`, display: 'inline-flex', alignItems: 'center', gap: 8, marginBottom: expanded ? 48 : 0 }}>
+        {expanded ? 'COLLAPSE DECISION LOG ↑' : 'READ THE DECISION LOG ↓'}
+      </button>
+
+      {expanded && (
+        <div>
+          {project.sections.map(sec => (
+            <div key={sec.id} style={{ marginBottom: 44 }}>
+              <p style={{ fontFamily: jb, fontSize: 11, letterSpacing: '0.15em', textTransform: 'uppercase', color: C.accent, marginBottom: 18 }}>
+                {sec.title}
+              </p>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+                {sec.bullets.map((b, i) => (
+                  <div key={i} style={{ display: 'flex', gap: 14, alignItems: 'flex-start' }}>
+                    <span style={{ color: C.textMuted, flexShrink: 0, fontFamily: jb, fontSize: 13, lineHeight: 1.75 }}>→</span>
+                    <p style={{ fontFamily: sg, fontSize: 14, color: C.textSecond, lineHeight: 1.8 }}>{b}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+
+          <div style={{ background: C.card, border: `1px solid ${C.border}`, padding: 28, marginBottom: 36 }}>
+            <p style={{ fontFamily: jb, fontSize: 11, letterSpacing: '0.15em', textTransform: 'uppercase', color: C.textSecond, marginBottom: 24 }}>
+              THINKING BEHIND IT
+            </p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
+              {project.thinking.map(([assumption, reality], i) => (
+                <div key={i} style={{ display: 'flex', gap: 14 }}>
+                  <span style={{ color: C.textMuted, flexShrink: 0, fontFamily: jb, fontSize: 13, lineHeight: 1.75 }}>→</span>
+                  <p style={{ fontFamily: sg, fontSize: 13, lineHeight: 1.75 }}>
+                    <span style={{ color: C.textMuted }}>{assumption} </span>
+                    <span style={{ color: C.textPrimary }}>{reality}</span>
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="h-live"
+            style={{ fontFamily: jb, fontSize: 11, letterSpacing: '0.14em', textTransform: 'uppercase', padding: '14px 28px', background: 'transparent', color: C.textPrimary, border: `1px solid ${C.textPrimary}`, display: 'inline-flex', alignItems: 'center', gap: 8 }}>
+            ↗ SEE IT LIVE
+          </a>
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default function App() {
+  const [activeTab, setActiveTab] = useState(0);
+  const [expanded,  setExpanded]  = useState({ 0: false, 1: false, 2: false });
+  const [heroIdx,   setHeroIdx]   = useState(0);
+  const [heroVis,   setHeroVis]   = useState(true);
+  const tabsRef = useRef(null);
+
+  useEffect(() => {
+    const el = document.createElement('style');
+    el.textContent = GLOBAL_CSS;
+    document.head.appendChild(el);
+    return () => document.head.removeChild(el);
+  }, []);
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setHeroVis(false);
+      setTimeout(() => {
+        setHeroIdx(p => (p + 1) % HERO_LINES.length);
+        setHeroVis(true);
+      }, 480);
+    }, 4000);
+    return () => clearInterval(id);
+  }, []);
+
+  const scrollToTabs = () =>
+    tabsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+  const gutter = 'max(24px, calc((100vw - 960px) / 2))';
+
+  return (
+    <div style={{ background: C.bg, minHeight: '100vh' }}>
+
+      <section style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: `80px ${gutter}` }}>
+        <div style={{ marginBottom: 56 }}>
+          <p style={{ fontFamily: sg, fontWeight: 700, fontSize: 18, letterSpacing: '0.15em', textTransform: 'uppercase', color: C.textPrimary, marginBottom: 8 }}>
+            KRITI KUMARI
+          </p>
+          <p style={{ fontFamily: jb, fontSize: 11, letterSpacing: '0.2em', textTransform: 'uppercase', color: C.accent }}>
+            PRODUCT MANAGER
+          </p>
+        </div>
+
+        <div style={{ minHeight: 'clamp(52px,7vw,88px)', marginBottom: 28 }}>
+          <p
+            className={`hero-fade ${heroVis ? 'hero-in' : 'hero-out'}`}
+            style={{ fontFamily: sg, fontWeight: 400, fontSize: 'clamp(20px,2.8vw,32px)', color: C.textPrimary, lineHeight: 1.45, maxWidth: 700 }}
+          >
+            <HL text={HERO_LINES[heroIdx].text} hl={HERO_LINES[heroIdx].hl} />
+          </p>
+        </div>
+
+        <p style={{ fontFamily: sg, fontWeight: 400, fontSize: 14, color: C.textSecond, letterSpacing: '0.02em', marginBottom: 56 }}>
+          3 live products. Every decision documented.
+        </p>
+
+        <div className="hero-ctas" style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
+          <button onClick={scrollToTabs} className="h-primary"
+            style={{ fontFamily: sg, fontWeight: 700, fontSize: 13, letterSpacing: '0.1em', textTransform: 'uppercase', padding: '14px 28px', background: C.textPrimary, color: C.bg, border: 'none' }}>
+            SEE MY WORK
+          </button>
+
+          
+            href="https://docs.google.com/document/d/1XNEAJEkzXqUM4FSw41wIWECK6ySPA7m3/edit?usp=sharing"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="h-ghost"
+            style={{ fontFamily: sg, fontWeight: 700, fontSize: 13, letterSpacing: '0.1em', textTransform: 'uppercase', padding: '14px 28px', background: 'transparent', color: C.textPrimary, border: `1px solid ${C.textPrimary}`, display: 'inline-flex', alignItems: 'center' }}
+          >
+            READ CV
+          </a>
+        </div>
+      </section>
+
+      <div ref={tabsRef}>
+        <div className="tabs-container" style={{ position: 'sticky', top: 0, zIndex: 100, background: C.surface, borderBottom: `1px solid ${C.border}`, display: 'flex', overflowX: 'auto' }}>
+          {PROJECTS.map((p, i) => (
+            <button key={p.id} onClick={() => setActiveTab(i)} className="h-tab"
+              style={{ fontFamily: jb, fontSize: 11, letterSpacing: '0.12em', textTransform: 'uppercase', padding: '18px 24px', background: 'transparent', border: 'none', borderBottom: activeTab === i ? `2px solid ${C.accent}` : '2px solid transparent', marginBottom: -1, color: activeTab === i ? C.textPrimary : C.textMuted, display: 'flex', alignItems: 'center', gap: 8, whiteSpace: 'nowrap', flexShrink: 0 }}>
+              {activeTab === i && (
+                <span className="pulse-dot" style={{ width: 6, height: 6, borderRadius: '50%', background: C.green, flexShrink: 0 }} />
+              )}
+              {p.tab}
+            </button>
+          ))}
+        </div>
+
+        <div style={{ padding: `0 ${gutter} 96px` }}>
+          {PROJECTS.map((p, i) =>
+            activeTab === i ? (
+              <ProjectPanel key={p.id} project={p} expanded={expanded[i]} onToggle={() => setExpanded(prev => ({ ...prev, [i]: !prev[i] }))} />
+            ) : null
+          )}
+        </div>
+      </div>
+
+      <section style={{ padding: `80px ${gutter}`, borderTop: `1px solid ${C.border}` }}>
+        <p style={{ fontFamily: jb, fontSize: 11, letterSpacing: '0.2em', textTransform: 'uppercase', color: C.textSecond, marginBottom: 40 }}>
+          GO DEEPER
+        </p>
+        <div className="go-deeper-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 16 }}>
+          {GO_DEEPER.map(card => (
+            <div key={card.title} style={{ background: C.card, border: `1px solid ${C.border}`, padding: 28 }}>
+              <p style={{ fontFamily: jb, fontSize: 10, letterSpacing: '0.15em', textTransform: 'uppercase', color: C.textSecond, marginBottom: 22, lineHeight: 1.65, whiteSpace: 'pre-line' }}>
+                {card.title}
+              </p>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+                {card.links.map(lk => (
+                  <a key={lk.label} href={lk.url} target="_blank" rel="noopener noreferrer" className="h-link"
+                    style={{ fontFamily: sg, fontSize: 13, color: C.textPrimary, display: 'flex', alignItems: 'center', gap: 8 }}>
+                    <span style={{ color: C.accent, flexShrink: 0 }}>↗</span>
+                    {lk.label}
+                  </a>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section style={{ padding: `80px ${gutter}`, borderTop: `1px solid ${C.border}` }}>
+        <p style={{ fontFamily: jb, fontSize: 11, letterSpacing: '0.2em', textTransform: 'uppercase', color: C.textSecond, marginBottom: 40 }}>
+          GET IN TOUCH
+        </p>
+        <div className="contact-items" style={{ display: 'flex', flexDirection: 'column', gap: 22 }}>
+          {[
+            { label: 'Phone',    href: 'tel:+916201890335',                  text: '+91 6201890335',          ext: false },
+            { label: 'Email',    href: 'mailto:kritipm62@gmail.com',          text: 'kritipm62@gmail.com',     ext: false },
+            { label: 'LinkedIn', href: 'https://www.linkedin.com/in/kritiux', text: 'linkedin.com/in/kritiux', ext: true  },
+          ].map(item => (
+            <a key={item.label} href={item.href}
+              {...(item.ext ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+              className="h-link"
+              style={{ fontFamily: sg, fontSize: 16, color: C.textPrimary, display: 'flex', alignItems: 'center', gap: 16 }}>
+              <span style={{ fontFamily: jb, fontSize: 11, color: C.textMuted, textTransform: 'uppercase', letterSpacing: '0.1em', minWidth: 88 }}>
+                {item.label}
+              </span>
+              {item.text}
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <footer style={{ padding: `24px ${gutter}`, borderTop: `1px solid ${C.border}` }}>
+        <p style={{ fontFamily: jb, fontSize: 11, color: C.textMuted, letterSpacing: '0.08em' }}>
+          Last updated — Portfolio July 2026.
+        </p>
+      </footer>
+
+    </div>
+  );
+}
