@@ -69,10 +69,10 @@ const PROJECTS = [
   {
     id: 0,
     tab: 'AUTOMATED THE SEARCH',
-    heading: 'PM Job Search Outreach Agent',
-    tagline: 'Scrapes PM roles across five platforms daily. Drafts cold outreach in my exact voice. Delivers to Telegram at 8am. Live dashboard shows contact resolution, source performance, and funnel in real time.',
-    metric: '51 roles in one run. 23 with hiring manager emails. 15 drafts ready to send. Rs.0/month.',
-    tags: ['AI-native tooling', 'Systems thinking'],
+    heading: 'Autonomous PM Outreach Pipeline',
+    tagline: '7 scrapers. 5 APIs. 2-account key rotation so it never hits quota. Runs at 8AM daily on GitHub Actions — scrapes PM and growth roles across Hacker News, Cutshort, Google Jobs, JSearch, Internshala, iimjobs, and YC Jobs. Snov enrichment finds hiring manager emails. Claude drafts cold outreach in my voice with a company-specific observation. Delivers to Telegram. Live Flask dashboard tracks every lead from source to sent.',
+    metric: '18 messages delivered in one run. 7 sources live. Rs.0/month. Built and maintained entirely in production.',
+    tags: ['MULTI-SOURCE SCRAPING', 'API ROTATION', 'AI DRAFTING', 'AUTONOMOUS DELIVERY'],
     liveUrl: 'https://rolereach-production.up.railway.app',
     sections: [
       {
