@@ -85,7 +85,7 @@ const PROJECTS = [
     metric: 'Runs every morning at 8AM sharp. 14 new roles today. 125 in pipeline. Named email on 33 leads. LinkedIn contact on 20 more.',
     pmTags: ['SYSTEMS THINKING', 'ITERATIVE SHIPPING', 'HUMAN IN THE LOOP DESIGN', 'AGENTIC PRODUCT DESIGN'],
     techTags: ['API INTEGRATION', 'WEB SCRAPING', 'WORKFLOW AUTOMATION', 'PRODUCTION DEPLOYMENT', 'DATABASE MANAGEMENT', 'AI INTEGRATION'],
-    liveUrl: 'https://rolereach-production.up.railway.app',
+    liveUrl: 'https://rolereach.onrender.com',
     thinking: [
       ["More platforms delivering daily would create momentum. More sources, more options, constant progress.", "More platforms meant more accumulation. Jobs piled up unread and created anxiety, not action. Deduplication handled the overlap but the real fix was a sent and muted section. The dashboard now shows what needs attention, not everything ever scraped."],
       ["Full automation was the natural endpoint. And finding the email was enough to reach the right person.", "Emails going to real hiring managers without me reading them first is not efficiency. It is a fast way to make a bad impression at scale before any relationship exists. The human review gate stayed in on purpose. Not as a safety net. As a product decision about what trustworthy actually looks like. And when emails weren't landing the fix wasn't more volume. I added a LinkedIn URL and a DM drafter for the same contact. Same outreach, different channel, better odds."],
@@ -263,24 +263,24 @@ const GO_DEEPER = [
   {
     title: 'ROLEREACH',
     links: [
-      { label: 'PM Thinking Doc', url: null },
-      { label: 'PRD', url: null },
+      { label: 'PM Thinking Doc', url: 'https://docs.google.com/document/d/1okSpT6R14QdzQUyEci-MmYI1eIAsFU4L/edit?usp=sharing' },
+      { label: 'PRD', url: 'https://docs.google.com/document/d/1yg28tEFtGrw7cOWOK7IZLM0IbofKiBwe/edit?usp=sharing' },
       { label: 'GitHub', url: 'https://github.com/kritipm/rolereach' },
     ],
   },
   {
     title: 'BOLNA STUDIO',
     links: [
-      { label: 'PM Thinking Doc', url: null },
-      { label: 'PRD', url: null },
+      { label: 'PM Thinking Doc', url: 'https://docs.google.com/document/d/175Gg6ROjYAJnLLMb8vGeLbmPll0pm2jH/edit?usp=sharing' },
+      { label: 'PRD', url: 'https://docs.google.com/document/d/1g5iMeoSJIZvLnLncvMU8Zt36Gaaa4VaW/edit?usp=sharing' },
       { label: 'GitHub', url: 'https://github.com/kritipm/bol-na-funnel' },
     ],
   },
   {
     title: 'REACHMAP',
     links: [
-      { label: 'PM Thinking Doc', url: null },
-      { label: 'PRD', url: null },
+      { label: 'PM Thinking Doc', url: 'https://docs.google.com/document/d/1XwsyDVu_BAi3JwBOko6F2MZzHefdx0wW/edit?usp=sharing' },
+      { label: 'PRD', url: 'https://docs.google.com/document/d/1hYSuz0BpBrHkDrwzwLmjPOAihtV731er/edit?usp=sharing' },
       { label: 'GitHub', url: 'https://github.com/kritipm/rolereachability-tool' },
     ],
   },
@@ -479,7 +479,7 @@ export default function App() {
             SEE MY WORK
           </button>
           <a
-            href="https://docs.google.com/document/d/1XNEAJEkzXqUM4FSw41wIWECK6ySPA7m3/edit?usp=sharing"
+            href="https://docs.google.com/document/d/1AQNiKSa-3V8_QLb6py7CEst0_oYjadoq/edit?usp=sharing"
             target="_blank"
             rel="noopener noreferrer"
             className="h-ghost"
