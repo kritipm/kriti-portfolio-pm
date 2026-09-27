@@ -88,7 +88,7 @@ const PROJECTS = [
     heading: 'RoleReach',
     subheading: 'Full Stack Agentic System · Live in Production',
     tagline: 'PM job search was manual, scattered, and generic. I built end-to-end infrastructure that scrapes daily, resolves hiring manager contacts, drafts outreach in my voice, and delivers to Telegram every morning at 8AM. One step stays human. The final send is always my call.',
-    metric: '51 roles daily · 125 in pipeline · Named email on 33 leads · ₹0 monthly cost',
+    metric: '51 roles daily · 166 in pipeline · ~47% contact resolution · ₹0 monthly cost',
     pmTags: ['SYSTEMS THINKING','ITERATIVE SHIPPING','HUMAN IN THE LOOP DESIGN','AGENTIC PRODUCT DESIGN'],
     liveUrl: 'https://rolereach.onrender.com',
     skillSections: [
@@ -133,17 +133,17 @@ const PROJECTS = [
     quantMetrics: [
       { heading: 'PIPELINE SPEED',     label: 'Time: trigger to delivery',           type: 'REAL_USER',
         before: '120 min', value: '15 min', change: '↓ 87.5%', beforeBar: 100, bar: 13,
-        calc: 'Manual: role sourcing (30) + contact search (45) + draft writing (25) + formatting (20) = 120 min. System: GitHub Actions trigger to Telegram delivery, timed across 14 consecutive morning runs.' },
+        calc: 'Manual: role sourcing (30) + contact search (45) + draft writing (25) + formatting (20) = 120 min. System: Daily cron at 8AM IST via cron-job.org → GitHub Actions → scheduler.py → Telegram. Average runtime 8-14 minutes.' },
       { heading: 'DAILY ROLES',        label: 'PM roles per run, every morning',      type: 'REAL_USER',
         before: '~5 manual', value: '51', change: '↑ 920%', beforeBar: 10, bar: 100,
-        calc: '5 sources: LinkedIn, Naukri, Instahyre, Wellfound, direct ATS. De-duplicated and PM-role filtered before delivery.' },
+        calc: '7 active sources: Cutshort, Instahyre, JSearch, Google Jobs, HN Who\'s Hiring, Direct ATS (Greenhouse, Lever, SmartRecruiters, Workday), Internshala. 2 paused: iimjobs, YC Jobs. 7-day recency filter applied at scrape time. Title and experience level filters exclude senior, director and 3+ year roles. Deduplication via hashed role ID collapses same role from multiple sources to one record.' },
       { heading: 'RUNNING COST',       label: 'Monthly infrastructure cost',          type: 'REAL_USER',
         before: 'Paid tools', value: '₹0', change: '↓ 100%', note: 'Permanent. 4 months of live use.' },
       { heading: 'ITERATIONS',         label: 'Pipeline versions shipped',            type: 'REAL_USER',
         before: 'V1', value: 'V8', change: '8 versions', note: '4 months of daily active use' },
       { heading: 'CONTACT RESOLUTION', label: 'Roles with named email per run',       type: 'EARLY_SIGNAL',
-        before: '0', value: '23 / 51', change: '↑ from zero', beforeBar: 0, bar: 45,
-        calc: 'Snov.io API enrichment cross-referenced with LinkedIn URL. 23 of 51 roles resolve to a named, deliverable email per run. ~45% hit rate.' },
+        before: '0', value: '~47% per run', change: '↑ from zero', beforeBar: 0, bar: 47,
+        calc: 'Snov.io API enrichment cross-referenced with LinkedIn URL. Generic and invalid addresses filtered automatically. ~47% of roles per run resolve to a named, deliverable email.' },
       { heading: 'DRAFTS READY',       label: 'Outreach drafts generated per run',    type: 'EARLY_SIGNAL',
         before: '0', value: '15', change: '↑ from zero', beforeBar: 0, bar: 30 },
       { heading: 'COPY ITERATIONS',    label: 'Email rewrites before voice locked',   type: 'PEER_TEST',
@@ -810,7 +810,7 @@ export default function App() {
             style={{ fontFamily:sat, fontWeight:700, fontSize:14, letterSpacing:'0.08em', textTransform:'uppercase', padding:'16px 36px', background:C.white, color:C.bg, border:'none', cursor:'pointer' }}>
             SEE MY WORK
           </button>
-          <a href="https://docs.google.com/document/d/1AQNiKSa-3V8_QLb6py7CEst0_oYjadoq/edit?usp=sharing"
+          <a href="https://docs.google.com/document/d/1WEpxKUbA-mEIxJ01b16NYfU6e7j38ECb/edit?usp=sharing&ouid=106248563624236317414&rtpof=true&sd=true"
             target="_blank" rel="noopener noreferrer" className="hg"
             style={{ fontFamily:sat, fontWeight:700, fontSize:14, letterSpacing:'0.08em', textTransform:'uppercase', padding:'16px 36px', background:'transparent', color:C.white, border:'1px solid '+C.white, display:'inline-flex', alignItems:'center', textDecoration:'none' }}>
             READ CV
