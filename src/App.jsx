@@ -572,7 +572,7 @@ function EvolutionCarousel({ items }) {
   );
 }
 
-function V7Section() {
+function V9Section() {
   const [visible, setVisible] = useState(false);
   const ref = useRef(null);
 
@@ -669,7 +669,7 @@ function V7Section() {
             display: 'block', fontFamily: jb, fontSize: 10, fontWeight: 700,
             color: C.accent, padding: '5px 14px',
             border: '1px solid ' + C.accent, background: 'rgba(230,57,70,0.06)',
-          }}>V7</span>
+          }}>V9</span>
           <span style={{
             display: 'block', fontFamily: jb, fontSize: 8, letterSpacing: '0.1em',
             color: C.accent, textTransform: 'uppercase', marginTop: 5, paddingLeft: 2,
@@ -686,7 +686,7 @@ function V7Section() {
           color: C.white, lineHeight: 1.1,
           marginBottom: 20, letterSpacing: '-0.01em',
         }}>
-          V7 is shipping this week.
+          V9 is shipping this week.
         </h3>
         <p style={{ fontFamily: inter, fontSize: 16, color: C.mid, lineHeight: 1.9, maxWidth: 560 }}>
           Not another feature drop.<br />
@@ -704,7 +704,7 @@ function V7Section() {
           fontFamily: jb, fontSize: 9, letterSpacing: '0.22em',
           textTransform: 'uppercase', color: C.accent, marginBottom: 20, fontWeight: 700,
         }}>
-          V7 · SHIPPING THIS WEEK
+          V9 · SHIPPING THIS WEEK
         </p>
         <p style={{
           fontFamily: sat, fontWeight: 700, fontSize: 'clamp(22px,2.8vw,34px)',
@@ -827,7 +827,7 @@ function V7Section() {
           color: C.white, lineHeight: 1.2,
           letterSpacing: '-0.02em', maxWidth: 700,
         }}>
-          V7 is where RoleReach stops being a job scraper{' '}
+          V9 is where RoleReach stops being a job scraper{' '}
           and becomes a <span style={{ color: C.accent }}>decision system</span>.
         </p>
       </div>
@@ -996,8 +996,8 @@ function ProjectPanel({ project }) {
       {/* ── EVOLUTION ── */}
       <EvolutionCarousel items={project.evolution} />
 
-      {/* ── V7: NEXT VERSION (RoleReach only) ── */}
-      {project.id === 0 && <V7Section />}
+      {/* ── V9: NEXT VERSION (RoleReach only) ── */}
+      {project.id === 0 && <V9Section />}
 
       {/* ── BOTTOM CTA ── */}
       <div style={{ marginTop:56 }}>
