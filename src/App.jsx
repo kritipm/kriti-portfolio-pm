@@ -1,5 +1,5 @@
 // v12
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 // ─── DESIGN SYSTEM ─────────────────────────────────────────────────────────────
 // 3 colors. No exceptions.
@@ -54,6 +54,8 @@ const GLOBAL_CSS = [
   '  .hero-ctas{flex-direction:column !important;width:100%;}',
   '  .hero-ctas button,.hero-ctas a{width:100%;text-align:center;justify-content:center;}',
   '}',
+  '.v7-blocks{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;}',
+  '@media(max-width:768px){.v7-blocks{grid-template-columns:1fr !important;}.v7-metric{border-right:none !important;padding-left:0 !important;padding-right:0 !important;}}',
 ].join('\n');
 
 // ─── HELPERS ───────────────────────────────────────────────────────────────────
@@ -570,6 +572,270 @@ function EvolutionCarousel({ items }) {
   );
 }
 
+function V7Section() {
+  const [visible, setVisible] = useState(false);
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setVisible(true); observer.disconnect(); } },
+      { threshold: 0.08 }
+    );
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
+
+  const rev = (delay = 0) => ({
+    opacity: visible ? 1 : 0,
+    transform: visible ? 'none' : 'translateY(14px)',
+    transition: `opacity 0.55s ease ${delay}ms, transform 0.55s ease ${delay}ms`,
+  });
+
+  const BLOCKS = [
+    {
+      num: '01',
+      label: 'BETTER SIGNAL',
+      flow: ['261 discovered', '170 eligible'],
+      copy: 'Hard eligibility gates now remove roles that do not belong in the funnel before they consume attention.',
+    },
+    {
+      num: '02',
+      label: 'SMARTER PRIORITIZATION',
+      flow: ['Eligible', 'Fit', 'Priority', 'Attack'],
+      copy: 'Every eligible opportunity now moves through a structured decision layer instead of being treated as another job to apply to.',
+    },
+    {
+      num: '03',
+      label: 'FROM JOBS TO ACTIONS',
+      flow: ['Product person', 'LinkedIn', 'Email', 'Apply'],
+      copy: 'RoleReach identifies the strongest available route and prepares the next action — surfacing relevant product people, LinkedIn URLs, attributed emails where available, LinkedIn DM drafts, email drafts, or application links.',
+    },
+    {
+      num: '04',
+      label: 'CLOSED-LOOP LEARNING',
+      flow: ['Attack', 'Response', 'Conversation', 'Interview', 'Outcome'],
+      copy: 'The system now tracks progression through the funnel so activity can be measured against actual outcomes.',
+    },
+  ];
+
+  const METRICS = [
+    { value: '261', label: 'DISCOVERED' },
+    { value: '170', label: 'ELIGIBLE' },
+    { value: '84',  label: 'REVIEW' },
+    { value: '41',  label: 'CONTACTS FOUND' },
+    { value: '22',  label: 'NEW TODAY' },
+  ];
+
+  const BRIDGE = [
+    { v: 'V3', desc: 'Dashboard' },
+    { v: 'V4', desc: 'Direct ATS scraper' },
+    { v: 'V5', desc: 'Better job-source signal' },
+    { v: 'V6', desc: 'Email + LinkedIn distribution' },
+  ];
+
+  return (
+    <div ref={ref} style={{ marginTop: 80 }}>
+
+      {/* ── VERSION BRIDGE ── */}
+      <div style={{
+        ...rev(0),
+        paddingTop: 48,
+        borderTop: '1px solid rgba(255,255,255,0.06)',
+        display: 'flex', alignItems: 'flex-start', flexWrap: 'wrap',
+        gap: '10px 0', marginBottom: 64,
+      }}>
+        {BRIDGE.map((item) => (
+          <div key={item.v} style={{ display: 'flex', alignItems: 'flex-start', flexShrink: 0 }}>
+            <div style={{ textAlign: 'left' }}>
+              <span style={{
+                display: 'block', fontFamily: jb, fontSize: 10, fontWeight: 700,
+                color: 'rgba(255,255,255,0.22)', padding: '5px 12px',
+                border: '1px solid rgba(255,255,255,0.09)',
+              }}>{item.v}</span>
+              <span style={{
+                display: 'block', fontFamily: jb, fontSize: 8, letterSpacing: '0.1em',
+                color: 'rgba(255,255,255,0.18)', textTransform: 'uppercase',
+                marginTop: 5, paddingLeft: 2,
+              }}>{item.desc}</span>
+            </div>
+            <span style={{
+              fontFamily: jb, fontSize: 13, color: 'rgba(255,255,255,0.1)',
+              padding: '4px 10px 0', flexShrink: 0,
+            }}>→</span>
+          </div>
+        ))}
+        <div style={{ flexShrink: 0 }}>
+          <span style={{
+            display: 'block', fontFamily: jb, fontSize: 10, fontWeight: 700,
+            color: C.accent, padding: '5px 14px',
+            border: '1px solid ' + C.accent, background: 'rgba(230,57,70,0.06)',
+          }}>V7</span>
+          <span style={{
+            display: 'block', fontFamily: jb, fontSize: 8, letterSpacing: '0.1em',
+            color: C.accent, textTransform: 'uppercase', marginTop: 5, paddingLeft: 2,
+          }}>Decision + execution system</span>
+        </div>
+      </div>
+
+      {/* ── EYEBROW + HEADING ── */}
+      <div style={{ ...rev(80), marginBottom: 52 }}>
+        <RedLabel text="THE NEXT VERSION" />
+        <h3 style={{
+          fontFamily: sat, fontWeight: 700,
+          fontSize: 'clamp(26px,3.5vw,44px)',
+          color: C.white, lineHeight: 1.1,
+          marginBottom: 20, letterSpacing: '-0.01em',
+        }}>
+          V7 is shipping this week.
+        </h3>
+        <p style={{ fontFamily: inter, fontSize: 16, color: C.mid, lineHeight: 1.9, maxWidth: 560 }}>
+          Not another feature drop.<br />
+          A full iteration of RoleReach based on what the previous versions exposed.
+        </p>
+      </div>
+
+      {/* ── V7 RELEASE CARD ── */}
+      <div style={{
+        ...rev(160),
+        background: '#0C0C0C', borderLeft: '3px solid ' + C.accent,
+        padding: '36px 40px', marginBottom: 56,
+      }}>
+        <p style={{
+          fontFamily: jb, fontSize: 9, letterSpacing: '0.22em',
+          textTransform: 'uppercase', color: C.accent, marginBottom: 20, fontWeight: 700,
+        }}>
+          V7 · SHIPPING THIS WEEK
+        </p>
+        <p style={{
+          fontFamily: sat, fontWeight: 700, fontSize: 'clamp(22px,2.8vw,34px)',
+          color: C.white, lineHeight: 1.15, marginBottom: 16, letterSpacing: '-0.01em',
+        }}>
+          From finding jobs to deciding what deserves action.
+        </p>
+        <p style={{ fontFamily: inter, fontSize: 15, color: C.mid, lineHeight: 1.9, maxWidth: 600 }}>
+          The latest iteration turns RoleReach from a job discovery system into a decision and execution system.
+        </p>
+      </div>
+
+      {/* ── 4 EVOLUTION BLOCKS ── */}
+      <div className="v7-blocks" style={{ ...rev(240), marginBottom: 40 }}>
+        {BLOCKS.map((block) => (
+          <div key={block.num} style={{
+            background: C.card, padding: '28px 24px',
+            borderTop: '2px solid rgba(255,255,255,0.07)',
+          }}>
+            <p style={{
+              fontFamily: jb, fontSize: 26, fontWeight: 700,
+              color: C.accent, marginBottom: 14, lineHeight: 1,
+            }}>
+              {block.num}
+            </p>
+            <p style={{
+              fontFamily: jb, fontSize: 9, letterSpacing: '0.18em',
+              textTransform: 'uppercase', color: C.white,
+              marginBottom: 18, fontWeight: 700, lineHeight: 1.4,
+            }}>
+              {block.label}
+            </p>
+            <div style={{
+              display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '4px 3px',
+              marginBottom: 16, paddingBottom: 14,
+              borderBottom: '1px solid rgba(255,255,255,0.06)',
+            }}>
+              {block.flow.flatMap((step, j) => {
+                const items = [
+                  <span key={'s'+j} style={{
+                    fontFamily: jb, fontSize: 9, letterSpacing: '0.06em',
+                    color: j === 0 ? C.mid : j === block.flow.length - 1 ? C.accent : 'rgba(255,255,255,0.32)',
+                    whiteSpace: 'nowrap',
+                  }}>{step}</span>
+                ];
+                if (j < block.flow.length - 1) {
+                  items.push(
+                    <span key={'a'+j} style={{ color: 'rgba(255,255,255,0.15)', fontFamily: jb, fontSize: 10, flexShrink: 0 }}>→</span>
+                  );
+                }
+                return items;
+              })}
+            </div>
+            <p style={{ fontFamily: inter, fontSize: 13, color: C.mid, lineHeight: 1.85 }}>
+              {block.copy}
+            </p>
+          </div>
+        ))}
+      </div>
+
+      {/* ── PRODUCT PRINCIPLE ── */}
+      <div style={{
+        ...rev(320),
+        borderTop: '1px solid rgba(255,255,255,0.08)',
+        paddingTop: 32, marginBottom: 56,
+      }}>
+        <p style={{ fontFamily: inter, fontSize: 15, color: C.bright, lineHeight: 1.9, marginBottom: 12 }}>
+          <span style={{ color: C.white, fontWeight: 600 }}>RoleReach recommends the path.</span>{' '}
+          The user chooses to take each step.
+        </p>
+        <p style={{ fontFamily: inter, fontSize: 13, color: 'rgba(255,255,255,0.38)', lineHeight: 1.85 }}>
+          The product does not automatically send DMs, emails or applications.
+          It calculates, recommends, prepares and tracks. The user remains in control of execution.
+        </p>
+      </div>
+
+      {/* ── METRICS STRIP ── */}
+      <div style={{
+        ...rev(400),
+        borderTop: '1px solid rgba(255,255,255,0.08)',
+        borderBottom: '1px solid rgba(255,255,255,0.08)',
+        padding: '32px 0', marginBottom: 56,
+      }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px 0' }}>
+          {METRICS.map((m, i) => (
+            <div key={i} className="v7-metric" style={{
+              flex: '1 1 100px',
+              paddingLeft: i > 0 ? 24 : 0,
+              paddingRight: i < METRICS.length - 1 ? 24 : 0,
+              borderRight: i < METRICS.length - 1 ? '1px solid rgba(255,255,255,0.07)' : 'none',
+            }}>
+              <p style={{
+                fontFamily: jb, fontSize: 30, fontWeight: 700,
+                color: C.white, lineHeight: 1, marginBottom: 8,
+              }}>
+                {m.value}
+              </p>
+              <p style={{
+                fontFamily: jb, fontSize: 8, letterSpacing: '0.18em',
+                textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)', fontWeight: 700,
+              }}>
+                {m.label}
+              </p>
+            </div>
+          ))}
+        </div>
+        <p style={{
+          fontFamily: jb, fontSize: 8, letterSpacing: '0.14em',
+          textTransform: 'uppercase', color: 'rgba(255,255,255,0.18)', marginTop: 20,
+        }}>
+          Current production snapshot · RoleReach
+        </p>
+      </div>
+
+      {/* ── BIG STATEMENT ── */}
+      <div style={{ ...rev(480) }}>
+        <p style={{
+          fontFamily: sat, fontWeight: 700,
+          fontSize: 'clamp(24px,3.8vw,48px)',
+          color: C.white, lineHeight: 1.2,
+          letterSpacing: '-0.02em', maxWidth: 700,
+        }}>
+          V7 is where RoleReach stops being a job scraper{' '}
+          and becomes a <span style={{ color: C.accent }}>decision system</span>.
+        </p>
+      </div>
+
+    </div>
+  );
+}
+
 function ProjectPanel({ project }) {
   const allMetrics = project.quantMetrics;
 
@@ -729,6 +995,9 @@ function ProjectPanel({ project }) {
 
       {/* ── EVOLUTION ── */}
       <EvolutionCarousel items={project.evolution} />
+
+      {/* ── V7: NEXT VERSION (RoleReach only) ── */}
+      {project.id === 0 && <V7Section />}
 
       {/* ── BOTTOM CTA ── */}
       <div style={{ marginTop:56 }}>
